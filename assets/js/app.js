@@ -4,19 +4,27 @@ let result = document.querySelector(".message-box");
 let numText = document.querySelector(".num");
 let msg = document.querySelector(".message-box");
 
-inputText.addEventListener("input", function(){
-  let number = inputText.value;
+inputText.addEventListener("input", () => {
 
-  fetch('http://numbersapi.com/'+number)
-    .then(response => response.text())
-    .then(data => {
-      if(data.status = 200 && number !== ''){
-        msg.style.display = "block";
-        numText.innerText = data;
-      }        
-     })
-      .catch(err => console.log(err.message));
+  const fetchData = async () => {
+    let number = inputText.value;
+    let url = "http://numbersapi.com/";
+  
+    fetch(url+number)
+      .then(response => response.text())
+      .then(data => {
+        if(data.status = 200 && number !== ''){
+          msg.style.display = "block";
+          numText.innerText = data;
+        } else {
+          msg.style.display = "none";
+        }
+       })
+        .catch(err => console.log(err.message));
+  }
+  fetchData();
 })
+
 
   
 
